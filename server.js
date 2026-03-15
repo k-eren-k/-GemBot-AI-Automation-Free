@@ -5,6 +5,7 @@ const express    = require('express');
 const bodyParser = require('body-parser');
 const helmet     = require('helmet');
 const morgan     = require('morgan');
+const cors       = require('cors');
 const path       = require('path');
 const fs         = require('fs');
 const { v4: uuidv4 } = require('uuid');
@@ -21,6 +22,14 @@ const {
 } = require('./gemini-browser');
 
 const app = express();
+
+// CORS — tüm kaynaklardan gelen isteklere izin ver
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-api-key'],
+}));
+app.options('*', cors()); // preflight isteklerini handle et
 
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use((req, res, next) => {
@@ -246,7 +255,7 @@ app.use((err, req, res, _next) => {
   logger.endTask('api-keys');
 
   logger.startTask('server-init', 'Sunucu başlatılıyor');
-  app.listen(PORT, '127.0.0.1', () => {
+  app.listen(PORT, '0.0.0.0', () => {
     logger.endTask('server-init');
     
     logger.box('SİSTEM ÇALIŞIYOR', [
