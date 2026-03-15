@@ -2,6 +2,7 @@ const fs = require('fs');
 const { randomUUID } = require('crypto');
 const { APIKEYS_FILE, KEY_PREFIX } = require('./config');
 const logger = require('./logger');
+const { c } = logger;
 
 const MASK = (k) => k.substring(0, 8) + '****' + k.slice(-6);
 
