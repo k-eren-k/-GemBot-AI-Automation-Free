@@ -1,0 +1,88 @@
+:root {
+  --bg: #faf8f5;
+  --bg2: #ffffff;
+  --border: rgba(180,140,80,0.12);
+  --text: #1a1410;
+  --text2: #6b5840;
+  --accent: #e8650a;
+  --glow: rgba(232,101,10,0.14);
+  --font: 'Plus Jakarta Sans', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.setup-container { width: 100%; max-width: 500px; padding: 20px; }
+.setup-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+}
+.setup-header { text-align: center; margin-bottom: 40px; }
+.logo {
+  width: 60px; height: 60px;
+  background: var(--accent);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 5px 15px var(--glow);
+}
+.title { font-family: 'Instrument Serif', serif; font-size: 32px; font-style: italic; margin-bottom: 8px; }
+.subtitle { font-size: 14px; color: var(--text2); }
+.step { display: none; gap: 20px; }
+.step.active { display: flex; }
+.step-num {
+  width: 32px; height: 32px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step-content h3 { font-size: 18px; margin-bottom: 8px; }
+.step-content p { font-size: 14px; color: var(--text2); margin-bottom: 15px; }
+.status-box, .success-box {
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+}
+.status-box { background: #f5f1eb; border: 1px solid var(--border); color: var(--text2); }
+.success-box { background: rgba(45,159,106,0.1); border: 1px solid rgba(45,159,106,0.2); color: #2d9f6a; }
+.input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+.input-group input:focus { border-color: var(--accent); }
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+.mt-20 { margin-top: 20px; }

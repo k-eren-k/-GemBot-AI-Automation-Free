@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Akademi — Gemini Bot</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/tutorial.css">
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="/" class="topbar-logo">
+    <div class="logo-mark">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    </div>
+    <span class="logo-text">Gemini Bot</span>
+  </a>
+  <div class="topbar-divider"></div>
+  <span class="topbar-title">Akademi</span>
+  <a href="/" class="btn-back">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    Panele Dön
+  </a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow"><div class="hero-dot"></div>Eğitim Merkezi</div>
+  <h1 class="hero-title">Sistemi Kullanmayı<br>Öğrenin</h1>
+  <p class="hero-sub">Gemini Bot'u en verimli şekilde kullanmanız için hazırladığımız adım adım rehber.</p>
+
+  <div class="progress-strip">
+    <div class="progress-step done">
+      <div class="progress-num">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      Model Seç
+    </div>
+    <div class="progress-line"></div>
+    <div class="progress-step active">
+      <div class="progress-num">2</div>
+      Sohbet Başlat
+    </div>
+    <div class="progress-line"></div>
+    <div class="progress-step">
+      <div class="progress-num">3</div>
+      Geçmişi Kullan
+    </div>
+    <div class="progress-line"></div>
+    <div class="progress-step">
+      <div class="progress-num">4</div>
+      API Entegrasyonu
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- STEP 1: MODEL -->
+  <div class="step-wrap">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num-badge">01</div>
+        <div class="step-meta">
+          <div class="step-label">Adım 01 / Kurulum</div>
+          <div class="step-title">Doğru Modeli Seçin</div>
+        </div>
+        <span class="step-tag tag-essential">Temel</span>
+      </div>
+      <div class="step-body">
+        <div>
+          <p class="step-desc">İhtiyacınıza göre üç farklı Gemini modeli arasından seçim yapabilirsiniz. Her modelin kendine özgü güçlü yanları vardır.</p>
+          <ul class="feature-list">
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span><strong>Hızlı</strong> — Günlük basit sorular, anlık cevaplar için idealdir.</span>
+            </li>
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span><strong>Düşünen</strong> — Mantıksal çıkarım ve adım adım çözüm gerektiren problemler için.</span>
+            </li>
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span><strong>Pro</strong> — Kodlama, matematik ve en üst düzey performans gerektiğinde.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="visual-panel">
+          <div class="model-tabs" id="modelTabs">
+            <div class="model-tab active-tab" onclick="selectModel(this,0)">Hızlı</div>
+            <div class="model-tab" onclick="selectModel(this,1)">Düşünen</div>
+            <div class="model-tab" onclick="selectModel(this,2)">Pro</div>
+          </div>
+          <div class="model-detail" id="modelDetail">
+            <div class="model-detail-label">Aktif Model</div>
+            <div class="model-detail-name" id="mdName">Flash 2.0</div>
+            <div class="model-detail-desc" id="mdDesc">Hızlı yanıtlar için optimize edilmiş model. Günlük görevler ve sohbet için en iyi seçim.</div>
+            <div class="model-bar-row">
+              <div class="model-bar-label"><span>Hız</span><span id="mdSpeed">●●●●●</span></div>
+              <div class="model-bar"><div class="model-bar-fill" id="mdBar" style="width:95%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2: NEW CHAT -->
+  <div class="step-wrap">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num-badge">02</div>
+        <div class="step-meta">
+          <div class="step-label">Adım 02 / Sohbet</div>
+          <div class="step-title">Yeni Sohbet Başlatın</div>
+        </div>
+        <span class="step-tag tag-essential">Temel</span>
+      </div>
+      <div class="step-body">
+        <div>
+          <p class="step-desc">Gemini'nin önceki konuşmaları hatırlamasını istemiyorsanız veya yeni bir konuya geçiyorsanız "Yeni Sohbet" düğmesini kullanın.</p>
+          <ul class="feature-list">
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Hafızayı tamamen sıfırlar ve Gemini'yi temiz bir sayfaya alır.</span>
+            </li>
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Playwright tarayıcıda yeni sekme açılır, önceki bağlam silinir.</span>
+            </li>
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Daha odaklanmış ve tutarlı yanıtlar almanızı sağlar.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="visual-panel">
+          <div class="chat-visual">
+            <div class="chat-bubble-out">Yeni bir proje başlıyorum.</div>
+            <div class="chat-bubble-in">
+              <div class="typing-bubble">
+                <div class="dot-anim"></div>
+                <div class="dot-anim"></div>
+                <div class="dot-anim"></div>
+              </div>
+            </div>
+            <div class="reset-banner">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+              Yeni sohbet başlatıldı — hafıza temizlendi.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3: HISTORY -->
+  <div class="step-wrap">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num-badge">03</div>
+        <div class="step-meta">
+          <div class="step-label">Adım 03 / Navigasyon</div>
+          <div class="step-title">Geçmişe Göz Atın</div>
+        </div>
+        <span class="step-tag tag-pro">Pro İpucu</span>
+      </div>
+      <div class="step-body">
+        <div>
+          <p class="step-desc">Gemini üzerindeki eski konuşmalarınıza sol menüden hızlıca ulaşabilirsiniz. Her proje için ayrı sohbet tutmak verimliliğinizi artırır.</p>
+          <ul class="feature-list">
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Eski projelere, kod dosyalarına veya analizlere anında geri dönüş.</span>
+            </li>
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Gemini'nin özel "Gem" asistanlarını sohbet geçmişinden seçebilirsiniz.</span>
+            </li>
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Yenile butonu ile en güncel geçmişi çekebilirsiniz.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="visual-panel">
+          <div style="font-size:9px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
+            Sohbet Geçmişi
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          </div>
+          <div class="history-visual">
+            <div class="history-mock-item">
+              <div class="history-dot"></div>
+              <span class="history-text">React dashboard tasarımı</span>
+              <span class="history-time">2s önce</span>
+            </div>
+            <div class="history-mock-item hactive">
+              <div class="history-dot"></div>
+              <span class="history-text">API entegrasyon yardımı</span>
+              <span class="history-time">Aktif</span>
+            </div>
+            <div class="history-mock-item">
+              <div class="history-dot"></div>
+              <span class="history-text">Veri analizi ve özet</span>
+              <span class="history-time">1g önce</span>
+            </div>
+            <div class="history-mock-item">
+              <div class="history-dot"></div>
+              <span class="history-text">Python script hata ayıklama</span>
+              <span class="history-time">2g önce</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4: API -->
+  <div class="step-wrap">
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num-badge">04</div>
+        <div class="step-meta">
+          <div class="step-label">Adım 04 / İleri Düzey</div>
+          <div class="step-title">API Entegrasyonu</div>
+        </div>
+        <span class="step-tag tag-pro">İleri</span>
+      </div>
+      <div class="step-body">
+        <div>
+          <p class="step-desc">Dashboard'dan oluşturduğunuz API key'leri ile kendi uygulamalarınızı Gemini Bot'a bağlayabilirsiniz. Tam dokümantasyon için API Docs sayfasına göz atın.</p>
+          <ul class="feature-list">
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span><strong>Bearer token</strong> ile güvenli kimlik doğrulama.</span>
+            </li>
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>SSE ile <strong>streaming</strong> yanıtlar — canlı yazma efekti.</span>
+            </li>
+            <li>
+              <span class="check-icon"><svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Aktivite yönetimi ile zenginleştirilmiş bağlam gönderimi.</span>
+            </li>
+          </ul>
+        </div>
+        <div class="visual-panel">
+          <div class="api-visual">
+            <div class="api-endpoint-mock">
+              <span class="method-pill pill-post">POST</span>
+              <span class="endpoint-path">/api/chat</span>
+              <span class="endpoint-rt">~4.2s</span>
+            </div>
+            <div class="api-endpoint-mock">
+              <span class="method-pill pill-get">GET</span>
+              <span class="endpoint-path">/api/keys</span>
+              <span class="endpoint-rt">~12ms</span>
+            </div>
+            <div class="api-endpoint-mock">
+              <span class="method-pill pill-post">POST</span>
+              <span class="endpoint-path">/api/browser/open</span>
+              <span class="endpoint-rt">~2.1s</span>
+            </div>
+            <div style="padding:8px 10px;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:6px;font-size:10.5px;color:var(--green);font-weight:600;text-align:center;margin-top:2px">
+              60 req/dk · JSON · Bearer Auth
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="faq-section">
+    <div class="faq-title">Sık Sorulan Sorular</div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Tarayıcıyı neden ayrıca açmam gerekiyor?
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a">Sistem, Playwright ile Chrome'u kontrol ederek Gemini web arayüzünü otomasyonla kullanır. Bu nedenle Chrome'un önce "tarayıcıyı başlat" butonu ile ayağa kaldırılması, ardından sohbet gönderilebilmesi gerekir. API key'i gerektirmeyen bu yaklaşım, tamamen ücretsiz çalışır.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          API key'im nerede saklanıyor?
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a">API key'leriniz yerel veritabanında (SQLite) şifrelenmeden saklanır. Anahtarlar yalnızca kendi sunucunuzdaki istekleri doğrulamak için kullanılır — üçüncü taraf bir servise gönderilmez.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Streaming modu nasıl çalışır?
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a">/api/chat/stream endpoint'i Server-Sent Events (SSE) protokolünü kullanır. Gemini yanıt yazarken her metin parçası data: JSON satırı olarak akar. Yanıt tamamlandığında data: [DONE] veya done: true gönderilir. Dashboard bu akışı canlı olarak gösterir.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Model değişikliği mevcut sohbeti etkiler mi?
+          <span class="faq-chevron">▼</span>
+        </div>
+        <div class="faq-a">Evet, model değiştirildiğinde Gemini arayüzü üzerinde model seçimi güncellenir. Mevcut sohbet içeriği korunur ancak yeni mesajlar seçilen modelle işlenir. Temiz bir başlangıç istiyorsanız model değişikliği öncesi "Yeni Sohbet" kullanmanız önerilir.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER CTA -->
+  <div class="footer-cta">
+    <div class="footer-cta-text">
+      <h3>Hazırsın!</h3>
+      <p>Artık sistemi tam kapasite kullanabilirsin. Dashboard'a dön ya da API dökümanlarını incele.</p>
+    </div>
+    <div class="cta-btns">
+      <a href="/docs" class="btn-cta btn-cta-secondary">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        API Docs
+      </a>
+      <a href="/" class="btn-cta btn-cta-primary">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Dashboard'a Dön
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<script src="/js/tutorial.js"></script>
+</body>
+</html>

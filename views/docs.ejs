@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini Bot — API Docs</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/docs.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <div class="logo-mark">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div>
+        <div class="logo-text">Gemini Bot</div>
+        <div class="logo-ver">v2.0 · api docs</div>
+      </div>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+      <input class="search-input" type="text" placeholder="Endpoint ara…" id="searchInput" oninput="searchNav(this.value)">
+    </div>
+  </div>
+
+  <nav class="sidebar-nav" id="sidebarNav">
+    <div class="nav-group">
+      <div class="nav-group-title">Başlarken</div>
+      <a href="#intro"     class="nav-link" data-search="giriş base url format"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><span class="nav-link-text">Giriş</span></a>
+      <a href="#auth"      class="nav-link" data-search="authentication api key bearer token"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span class="nav-link-text">Authentication</span></a>
+      <a href="#errors"    class="nav-link" data-search="hata kodları error 400 401 403 500"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span class="nav-link-text">Hata Kodları</span></a>
+      <a href="#ratelimit" class="nav-link" data-search="rate limit hız sınır 429"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="nav-link-text">Rate Limiting</span></a>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-group-title">Endpoints</div>
+      <a href="#health"            class="nav-link" data-search="health check sağlık"><span class="method-badge b-get">GET</span><span class="nav-link-text">/api/health</span></a>
+      <a href="#chat"              class="nav-link" data-search="chat mesaj post"><span class="method-badge b-post">POST</span><span class="nav-link-text">/api/chat</span></a>
+      <a href="#chat-stream"       class="nav-link" data-search="chat stream sse streaming"><span class="method-badge b-post">POST</span><span class="nav-link-text">/api/chat/stream</span></a>
+      <a href="#chat-new"          class="nav-link" data-search="chat yeni sohbet new post"><span class="method-badge b-post">POST</span><span class="nav-link-text">/api/chat/new</span></a>
+      <a href="#chat-history"      class="nav-link" data-search="chat geçmiş history get"><span class="method-badge b-get">GET</span><span class="nav-link-text">/api/chat/history</span></a>
+      <a href="#chat-switch"       class="nav-link" data-search="chat geçiş switch post"><span class="method-badge b-post">POST</span><span class="nav-link-text">/api/chat/switch</span></a>
+      <a href="#chat-messages"     class="nav-link" data-search="chat mesajlar messages get"><span class="method-badge b-get">GET</span><span class="nav-link-text">/api/chat/messages</span></a>
+      <a href="#chat-model"        class="nav-link" data-search="chat model değiştir post"><span class="method-badge b-post">POST</span><span class="nav-link-text">/api/chat/model</span></a>
+      <a href="#ep-keys-get"       class="nav-link" data-search="keys liste get"><span class="method-badge b-get">GET</span><span class="nav-link-text">/api/keys</span></a>
+      <a href="#ep-keys-post"      class="nav-link" data-search="keys oluştur post"><span class="method-badge b-post">POST</span><span class="nav-link-text">/api/keys</span></a>
+      <a href="#ep-keys-del"       class="nav-link" data-search="keys sil delete"><span class="method-badge b-del">DEL</span><span class="nav-link-text">/api/keys/:id</span></a>
+      <a href="#ep-stats"          class="nav-link" data-search="stats istatistik"><span class="method-badge b-get">GET</span><span class="nav-link-text">/api/stats</span></a>
+      <a href="#ep-act-get"        class="nav-link" data-search="activities aktivite get"><span class="method-badge b-get">GET</span><span class="nav-link-text">/api/activities</span></a>
+      <a href="#ep-act-post"       class="nav-link" data-search="activities aktivite ekle post"><span class="method-badge b-post">POST</span><span class="nav-link-text">/api/activities</span></a>
+      <a href="#ep-act-del"        class="nav-link" data-search="activities sil delete"><span class="method-badge b-del">DEL</span><span class="nav-link-text">/api/activities/:id</span></a>
+      <a href="#ep-browser-open"   class="nav-link" data-search="browser tarayıcı aç post"><span class="method-badge b-post">POST</span><span class="nav-link-text">/api/browser/open</span></a>
+      <a href="#ep-browser-reset"  class="nav-link" data-search="browser sıfırla reset post"><span class="method-badge b-post">POST</span><span class="nav-link-text">/api/browser/reset</span></a>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="/"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>Dashboard'a Dön</a>
+  </div>
+</aside>
+
+<main class="content">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow"><div class="hero-dot"></div>API Referansı — v2.0.0</div>
+    <h1>Gemini Bot API</h1>
+    <p class="subtitle">Playwright tabanlı Gemini AI asistan REST API'si. Tam sohbet yönetimi, SSE streaming, aktivite analizi ve tarayıcı otomasyonu için tek endpoint.</p>
+    <div class="hero-stats">
+      <div class="stat-chip"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span class="stat-chip-label">Base URL</span><span class="stat-chip-val">localhost:47371</span></div>
+      <div class="stat-chip"><span class="stat-chip-label">Format</span><span class="stat-chip-val">JSON</span></div>
+      <div class="stat-chip"><span class="stat-chip-label">Auth</span><span class="stat-chip-val">Bearer Token</span></div>
+      <div class="stat-chip"><span class="stat-chip-label">Streaming</span><span class="stat-chip-val">SSE</span></div>
+      <div class="stat-chip"><span class="stat-chip-label">Rate Limit</span><span class="stat-chip-val">60 req/dk</span></div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section" id="intro">
+    <div class="section-header">
+      <div class="section-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+      <div class="section-title">Giriş</div>
+      <span class="section-id">#intro</span>
+    </div>
+    <div class="info-box">
+      <strong>Base URL:</strong> <code>http://localhost:47371</code><br><br>
+      Tüm response'lar JSON formatındadır. Başarılı response'larda <code>"success": true</code> bulunur. Hatalı response'larda <code>"success": false</code> ve bir <code>"error"</code> string alanı döner.
+    </div>
+    <p>Bu API, Playwright kullanarak Gemini web arayüzünü otomasyonla kontrol eder. Google hesabına giriş yapılmış mevcut Chrome profilini kullanır — tamamen ücretsiz, Gemini API key gerektirmez.</p>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Kopyala</button>
+<span class="c-comment"># Başarılı response</span>
+{ <span class="c-key">"success"</span>: <span class="c-val">true</span>, <span class="c-key">"data"</span>: { <span class="c-comment">/* endpoint'e özel */</span> } }
+
+<span class="c-comment"># Hatalı response</span>
+{ <span class="c-key">"success"</span>: <span class="c-val">false</span>, <span class="c-key">"error"</span>: <span class="c-str">"Hata mesajı"</span> }</div>
+  </div>
+
+  <!-- AUTH -->
+  <div class="section" id="auth">
+    <div class="section-header">
+      <div class="section-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+      <div class="section-title">Authentication</div>
+      <span class="section-id">#auth</span>
+    </div>
+    <div class="warn-box">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span>Korumalı endpoint'lerde geçersiz veya eksik key gönderilirse <strong>401</strong> veya <strong>403</strong> döner.</span>
+    </div>
+    <div class="auth-grid">
+      <div class="auth-card"><div class="auth-num">01 / AUTH HEADER</div><div class="auth-title">Authorization</div><div class="auth-desc">Bearer token şeması ile standart HTTP auth header.</div><span class="auth-badge rec">Önerilen</span></div>
+      <div class="auth-card"><div class="auth-num">02 / CUSTOM HEADER</div><div class="auth-title">x-api-key</div><div class="auth-desc">Alternatif custom header, bazı istemcilerle daha kolay.</div><span class="auth-badge alt">Alternatif</span></div>
+      <div class="auth-card"><div class="auth-num">03 / QUERY PARAM</div><div class="auth-title">api_key param</div><div class="auth-desc">URL query parametresi. Sadece test için kullan.</div><span class="auth-badge alt">Test</span></div>
+    </div>
+    <div class="code-block">
+      <button class="copy-btn" onclick="copyCode(this)">Kopyala</button>
+<span class="c-comment"># Yöntem 1 (önerilen)</span>
+Authorization: Bearer gmb_xxxxxxxxxxxxxxxxxxxx
+
+<span class="c-comment"># Yöntem 2</span>
+x-api-key: gmb_xxxxxxxxxxxxxxxxxxxx
+
+<span class="c-comment"># Yöntem 3 (sadece test)</span>
+GET /api/stats?api_key=gmb_xxxxxxxxxxxxxxxxxxxx</div>
+    <div class="success-box">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px"><polyline points="20 6 9 17 4 12"/></svg>
+      <span>Dashboard üzerinden <strong>/api/keys</strong> endpoint'i ile yeni key oluşturabilirsin. İlk çalıştırmada bir <strong>default</strong> key otomatik oluşturulur.</span>
+    </div>
+  </div>
+
+  <!-- ERRORS -->
+  <div class="section" id="errors">
+    <div class="section-header">
+      <div class="section-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+      <div class="section-title">Hata Kodları</div>
+      <span class="section-id">#errors</span>
+    </div>
+    <div class="error-grid">
+      <div class="error-item e-2xx"><div class="error-code">200</div><div class="error-info"><div class="error-title">OK</div><div class="error-desc">İstek başarıyla tamamlandı</div></div></div>
+      <div class="error-item e-4xx"><div class="error-code">400</div><div class="error-info"><div class="error-title">Bad Request</div><div class="error-desc">Eksik veya geçersiz parametre</div></div></div>
+      <div class="error-item e-4xx"><div class="error-code">401</div><div class="error-info"><div class="error-title">Unauthorized</div><div class="error-desc">API key bulunamadı</div></div></div>
+      <div class="error-item e-4xx"><div class="error-code">403</div><div class="error-info"><div class="error-title">Forbidden</div><div class="error-desc">Geçersiz API key</div></div></div>
+      <div class="error-item e-4xx"><div class="error-code">404</div><div class="error-info"><div class="error-title">Not Found</div><div class="error-desc">Kaynak bulunamadı</div></div></div>
+      <div class="error-item e-4xx"><div class="error-code">429</div><div class="error-info"><div class="error-title">Too Many Requests</div><div class="error-desc">Rate limit aşıldı</div></div></div>
+      <div class="error-item e-5xx" style="grid-column:1/-1"><div class="error-code">500</div><div class="error-info"><div class="error-title">Internal Server Error</div><div class="error-desc">Sunucu tarafında beklenmedik hata</div></div></div>
+    </div>
+  </div>
+
+  <!-- RATE LIMIT -->
+  <div class="section" id="ratelimit">
+    <div class="section-header">
+      <div class="section-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div class="section-title">Rate Limiting</div>
+      <span class="section-id">#ratelimit</span>
+    </div>
+    <div class="rate-visual">
+      <div class="rate-bar-wrap">
+        <span style="font-size:11px;color:var(--text2);min-width:80px">IP başına</span>
+        <div class="rate-bar"><div class="rate-bar-fill"></div></div>
+        <span class="rate-label">60 req/dk</span>
+      </div>
+      <div class="rate-info">Tüm <code style="font-family:var(--mono);font-size:10px;color:var(--accent);background:var(--glow2);padding:1px 5px;border-radius:4px">/api/*</code> endpoint'leri için geçerlidir. Limit aşılınca <code style="font-family:var(--mono);font-size:10px;color:var(--yellow);background:var(--yellow-bg);padding:1px 5px;border-radius:4px">429</code> döner.</div>
+    </div>
+  </div>
+
+  <!-- HEALTH -->
+  <div class="section" id="health">
+    <div class="section-header">
+      <div class="section-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div class="section-title">Health Check</div>
+      <span class="section-id">#health</span>
+    </div>
+    <div class="endpoint open" id="ep-health">
+      <div class="endpoint-header" onclick="toggleEp('ep-health')">
+        <span class="ep-method get">GET</span><span class="ep-path">/api/health</span>
+        <span class="ep-desc">Sunucu ve tarayıcı durumunu kontrol et</span>
+        <span class="ep-auth pub">Public</span><span class="ep-chevron">▼</span>
+      </div>
+      <div class="endpoint-body">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl http://localhost:47371/api/health</div>
+        <div class="ep-section-title">Response</div>
+        <div class="response-chips"><span class="chip chip-ok">200 OK</span></div>
+        <div class="code-block">{
+  <span class="c-key">"success"</span>: <span class="c-val">true</span>,
+  <span class="c-key">"status"</span>: <span class="c-str">"ok"</span>,
+  <span class="c-key">"app"</span>: <span class="c-str">"Gemini Bot API"</span>,
+  <span class="c-key">"version"</span>: <span class="c-str">"2.0.0"</span>,
+  <span class="c-key">"browser"</span>: { <span class="c-key">"open"</span>: <span class="c-val">false</span>, <span class="c-key">"ready"</span>: <span class="c-val">false</span> },
+  <span class="c-key">"timestamp"</span>: <span class="c-str">"2026-03-15T10:00:00.000Z"</span>
+}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAT -->
+  <div class="section" id="chat">
+    <div class="section-header">
+      <div class="section-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+      <div class="section-title">Chat</div>
+      <span class="section-id">#chat</span>
+    </div>
+
+    <!-- /api/chat -->
+    <div class="endpoint" id="ep-chat">
+      <div class="endpoint-header" onclick="toggleEp('ep-chat')">
+        <span class="ep-method post">POST</span><span class="ep-path">/api/chat</span>
+        <span class="ep-desc">Gemini'ye mesaj gönder, tam yanıt bekle</span>
+        <span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span>
+      </div>
+      <div class="endpoint-body">
+        <div class="ep-section-title">Request Body</div>
+        <table>
+          <tr><th>Alan</th><th>Tip</th><th>Zorunlu</th><th>Açıklama</th></tr>
+          <tr><td><code>message</code></td><td>string</td><td><span class="req">*</span></td><td>Kullanıcı mesajı</td></tr>
+          <tr><td><code>mode</code></td><td>string</td><td><span class="opt">—</span></td><td><code>chat</code> · <code>analyze</code> · <code>summarize</code> · <code>plan</code> · <code>code</code> · <code>debug</code></td></tr>
+          <tr><td><code>activityIds</code></td><td>string[]</td><td><span class="opt">—</span></td><td>Bağlam için aktivite ID listesi</td></tr>
+        </table>
+        <div class="ep-section-title">Örnekler</div>
+        <div class="tabs">
+          <div class="tab active" onclick="switchTab(this,'chat-curl')">cURL</div>
+          <div class="tab" onclick="switchTab(this,'chat-js')">JavaScript</div>
+          <div class="tab" onclick="switchTab(this,'chat-analyze')">Analiz Modu</div>
+        </div>
+        <div id="chat-curl" class="tab-pane">
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl -X POST http://localhost:47371/api/chat \
+  -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span> \
+  -H <span class="c-str">"Content-Type: application/json"</span> \
+  -d <span class="c-str">'{"message": "Merhaba!", "mode": "chat"}'</span></div>
+        </div>
+        <div id="chat-js" class="tab-pane" style="display:none">
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button><span class="c-key">const</span> res = <span class="c-key">await</span> fetch(<span class="c-str">"http://localhost:47371/api/chat"</span>, {
+  method: <span class="c-str">"POST"</span>,
+  headers: {
+    <span class="c-str">"Authorization"</span>: <span class="c-str">"Bearer gmb_xxxxx"</span>,
+    <span class="c-str">"Content-Type"</span>: <span class="c-str">"application/json"</span>
+  },
+  body: JSON.stringify({ message: <span class="c-str">"Merhaba!"</span>, mode: <span class="c-str">"chat"</span> })
+});
+<span class="c-key">const</span> { response } = <span class="c-key">await</span> res.json();</div>
+        </div>
+        <div id="chat-analyze" class="tab-pane" style="display:none">
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl -X POST http://localhost:47371/api/chat \
+  -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span> \
+  -H <span class="c-str">"Content-Type: application/json"</span> \
+  -d <span class="c-str">'{"activityIds": ["id1","id2"], "mode": "analyze"}'</span></div>
+        </div>
+        <div class="ep-section-title">Response</div>
+        <div class="response-chips"><span class="chip chip-ok">200 OK</span><span class="chip chip-err">400</span><span class="chip chip-err">401</span></div>
+        <div class="code-block">{
+  <span class="c-key">"success"</span>: <span class="c-val">true</span>,
+  <span class="c-key">"response"</span>: <span class="c-str">"## Analiz\n\nAktiviteleriniz incelenmiştir..."</span>,
+  <span class="c-key">"responseTime"</span>: <span class="c-num">4231</span>
+}</div>
+      </div>
+    </div>
+
+    <!-- /api/chat/stream -->
+    <div class="endpoint" id="ep-chat-stream" style="scroll-margin-top:24px">
+      <div class="endpoint-header" onclick="toggleEp('ep-chat-stream')">
+        <span class="ep-method post">POST</span><span class="ep-path">/api/chat/stream</span>
+        <span class="ep-desc">Gerçek zamanlı SSE streaming yanıt</span>
+        <span class="ep-auth req">🔑 Auth</span>
+        <div class="ep-badge-sse">SSE</div>
+        <span class="ep-chevron">▼</span>
+      </div>
+      <div class="endpoint-body">
+        <div class="info-box" style="margin-bottom:14px">
+          Bu endpoint <strong>Server-Sent Events (SSE)</strong> döndürür. <code>Content-Type: text/event-stream</code> header'ı ile gelir. Gemini yanıt yazarken her metin parçası ayrı bir <code>data:</code> satırı olarak akar; tamamlandığında <code>done: true</code> gönderilir.
+        </div>
+        <div class="ep-section-title">Request Body</div>
+        <table>
+          <tr><th>Alan</th><th>Tip</th><th>Zorunlu</th><th>Açıklama</th></tr>
+          <tr><td><code>message</code></td><td>string</td><td><span class="req">*</span></td><td>Kullanıcı mesajı</td></tr>
+          <tr><td><code>mode</code></td><td>string</td><td><span class="opt">—</span></td><td><code>chat</code> · <code>analyze</code> · <code>plan</code> · <code>code</code> · <code>debug</code></td></tr>
+        </table>
+        <div class="ep-section-title">Örnekler</div>
+        <div class="tabs">
+          <div class="tab active" onclick="switchTab(this,'stream-js')">JavaScript (EventSource)</div>
+          <div class="tab" onclick="switchTab(this,'stream-fetch')">Fetch + ReadableStream</div>
+        </div>
+        <div id="stream-js" class="tab-pane">
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button><span class="c-comment">// EventSource sadece GET destekler; POST için fetch kullan</span>
+<span class="c-key">const</span> res = <span class="c-key">await</span> fetch(<span class="c-str">"/api/chat/stream"</span>, {
+  method: <span class="c-str">"POST"</span>,
+  headers: {
+    <span class="c-str">"Authorization"</span>: <span class="c-str">"Bearer gmb_xxxxx"</span>,
+    <span class="c-str">"Content-Type"</span>: <span class="c-str">"application/json"</span>
+  },
+  body: JSON.stringify({ message: <span class="c-str">"Bana bir plan yaz"</span>, mode: <span class="c-str">"plan"</span> })
+});
+
+<span class="c-key">const</span> reader = res.body.getReader();
+<span class="c-key">const</span> decoder = <span class="c-key">new</span> TextDecoder();
+
+<span class="c-key">while</span> (<span class="c-val">true</span>) {
+  <span class="c-key">const</span> { done, value } = <span class="c-key">await</span> reader.read();
+  <span class="c-key">if</span> (done) <span class="c-key">break</span>;
+
+  <span class="c-key">const</span> lines = decoder.decode(value).split(<span class="c-str">"\n"</span>);
+  <span class="c-key">for</span> (<span class="c-key">const</span> line <span class="c-key">of</span> lines) {
+    <span class="c-key">if</span> (!line.startsWith(<span class="c-str">"data: "</span>)) <span class="c-key">continue</span>;
+    <span class="c-key">const</span> payload = JSON.parse(line.slice(<span class="c-num">6</span>));
+    <span class="c-key">if</span> (payload.done) console.log(<span class="c-str">"Tamamlandı"</span>);
+    <span class="c-key">else if</span> (payload.text) process.stdout.write(payload.text);
+    <span class="c-key">else if</span> (payload.error) console.error(payload.error);
+  }
+}</div>
+        </div>
+        <div id="stream-fetch" class="tab-pane" style="display:none">
+          <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button><span class="c-comment">// React / hook örneği</span>
+<span class="c-key">async function</span> streamChat(message, onChunk, onDone) {
+  <span class="c-key">const</span> res = <span class="c-key">await</span> fetch(<span class="c-str">"/api/chat/stream"</span>, {
+    method: <span class="c-str">"POST"</span>,
+    headers: {
+      <span class="c-str">"Authorization"</span>: <span class="c-str">"Bearer gmb_xxxxx"</span>,
+      <span class="c-str">"Content-Type"</span>: <span class="c-str">"application/json"</span>
+    },
+    body: JSON.stringify({ message })
+  });
+
+  <span class="c-key">const</span> reader = res.body.getReader();
+  <span class="c-key">const</span> dec = <span class="c-key">new</span> TextDecoder();
+  <span class="c-key">let</span> buf = <span class="c-str">""</span>;
+
+  <span class="c-key">while</span> (<span class="c-val">true</span>) {
+    <span class="c-key">const</span> { done, value } = <span class="c-key">await</span> reader.read();
+    <span class="c-key">if</span> (done) <span class="c-key">break</span>;
+    buf += dec.decode(value, { stream: <span class="c-val">true</span> });
+    <span class="c-key">const</span> parts = buf.split(<span class="c-str">"\n\n"</span>);
+    buf = parts.pop();
+    <span class="c-key">for</span> (<span class="c-key">const</span> part <span class="c-key">of</span> parts) {
+      <span class="c-key">if</span> (!part.startsWith(<span class="c-str">"data: "</span>)) <span class="c-key">continue</span>;
+      <span class="c-key">const</span> p = JSON.parse(part.slice(<span class="c-num">6</span>));
+      <span class="c-key">if</span> (p.text && !p.done) onChunk(p.text);
+      <span class="c-key">if</span> (p.done) onDone(p.text);
+    }
+  }
+}</div>
+        </div>
+        <div class="ep-section-title">SSE Event Formatı</div>
+        <div class="code-block"><span class="c-comment"># Her chunk (Gemini yazarken)</span>
+data: {"text": "Planlama sonuçları..."}
+
+<span class="c-comment"># Tamamlandı</span>
+data: {"done": true, "text": "Tüm yanıt metni"}
+
+<span class="c-comment"># Hata</span>
+data: {"error": "Tarayıcı bağlantısı kesildi"}</div>
+      </div>
+    </div>
+
+    <!-- /api/chat/new -->
+    <div class="endpoint" id="ep-chat-new" style="scroll-margin-top:24px">
+      <div class="endpoint-header" onclick="toggleEp('ep-chat-new')">
+        <span class="ep-method post">POST</span><span class="ep-path">/api/chat/new</span>
+        <span class="ep-desc">Yeni sohbet başlat, hafızayı sıfırla</span>
+        <span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span>
+      </div>
+      <div class="endpoint-body">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl -X POST http://localhost:47371/api/chat/new \
+  -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span></div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{ <span class="c-key">"success"</span>: <span class="c-val">true</span>, <span class="c-key">"message"</span>: <span class="c-str">"Yeni sohbet başlatıldı."</span> }</div>
+      </div>
+    </div>
+
+    <!-- /api/chat/history -->
+    <div class="endpoint" id="ep-chat-history" style="scroll-margin-top:24px">
+      <div class="endpoint-header" onclick="toggleEp('ep-chat-history')">
+        <span class="ep-method get">GET</span><span class="ep-path">/api/chat/history</span>
+        <span class="ep-desc">Gemini'deki sohbet geçmişini getir</span>
+        <span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span>
+      </div>
+      <div class="endpoint-body">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl http://localhost:47371/api/chat/history \
+  -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span></div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{
+  <span class="c-key">"success"</span>: <span class="c-val">true</span>,
+  <span class="c-key">"chats"</span>: [
+    { <span class="c-key">"id"</span>: <span class="c-num">0</span>, <span class="c-key">"chatId"</span>: <span class="c-str">"8911453ce98062c6"</span>, <span class="c-key">"href"</span>: <span class="c-str">"/app/8911453ce98062c6"</span>, <span class="c-key">"title"</span>: <span class="c-str">"React dashboard tasarımı"</span>, <span class="c-key">"active"</span>: <span class="c-val">true</span> }
+  ]
+}</div>
+      </div>
+    </div>
+
+    <!-- /api/chat/switch -->
+    <div class="endpoint" id="ep-chat-switch" style="scroll-margin-top:24px">
+      <div class="endpoint-header" onclick="toggleEp('ep-chat-switch')">
+        <span class="ep-method post">POST</span><span class="ep-path">/api/chat/switch</span>
+        <span class="ep-desc">Geçmişteki bir sohbete geç</span>
+        <span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span>
+      </div>
+      <div class="endpoint-body">
+        <div class="ep-section-title">Request Body</div>
+        <table>
+          <tr><th>Alan</th><th>Tip</th><th>Zorunlu</th><th>Açıklama</th></tr>
+          <tr><td><code>index</code></td><td>number</td><td><span class="req">*</span></td><td>Sohbet index'i (<code>/api/chat/history</code> sonucundaki <code>id</code>)</td></tr>
+        </table>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl -X POST http://localhost:47371/api/chat/switch \
+  -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span> \
+  -H <span class="c-str">"Content-Type: application/json"</span> \
+  -d <span class="c-str">'{"index": 2}'</span></div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{ <span class="c-key">"success"</span>: <span class="c-val">true</span>, <span class="c-key">"message"</span>: <span class="c-str">"Sohbete geçildi."</span> }</div>
+      </div>
+    </div>
+
+    <!-- /api/chat/messages -->
+    <div class="endpoint" id="ep-chat-messages" style="scroll-margin-top:24px">
+      <div class="endpoint-header" onclick="toggleEp('ep-chat-messages')">
+        <span class="ep-method get">GET</span><span class="ep-path">/api/chat/messages</span>
+        <span class="ep-desc">Belirli bir sohbetin tüm mesajlarını getir</span>
+        <span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span>
+      </div>
+      <div class="endpoint-body">
+        <div class="ep-section-title">Query Params</div>
+        <table>
+          <tr><th>Param</th><th>Tip</th><th>Zorunlu</th><th>Açıklama</th></tr>
+          <tr><td><code>href</code></td><td>string</td><td><span class="req">*</span></td><td>Sohbet href'i (örn: <code>/app/8911453ce...</code>)</td></tr>
+        </table>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl "http://localhost:47371/api/chat/messages?href=/app/8911453ce98062c6" \
+  -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span></div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{
+  <span class="c-key">"success"</span>: <span class="c-val">true</span>,
+  <span class="c-key">"messages"</span>: [
+    { <span class="c-key">"role"</span>: <span class="c-str">"user"</span>, <span class="c-key">"text"</span>: <span class="c-str">"Proje planı yap"</span> },
+    { <span class="c-key">"role"</span>: <span class="c-str">"bot"</span>,  <span class="c-key">"text"</span>: <span class="c-str">"## Proje Planı\n\n..."</span> }
+  ]
+}</div>
+      </div>
+    </div>
+
+    <!-- /api/chat/model -->
+    <div class="endpoint" id="ep-chat-model" style="scroll-margin-top:24px">
+      <div class="endpoint-header" onclick="toggleEp('ep-chat-model')">
+        <span class="ep-method post">POST</span><span class="ep-path">/api/chat/model</span>
+        <span class="ep-desc">Aktif Gemini modelini değiştir</span>
+        <span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span>
+      </div>
+      <div class="endpoint-body">
+        <div class="ep-section-title">Request Body</div>
+        <table>
+          <tr><th>Alan</th><th>Tip</th><th>Zorunlu</th><th>Değerler</th></tr>
+          <tr><td><code>model</code></td><td>string</td><td><span class="req">*</span></td><td><code>flash</code> · <code>pro</code> · <code>thinking</code></td></tr>
+        </table>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl -X POST http://localhost:47371/api/chat/model \
+  -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span> \
+  -H <span class="c-str">"Content-Type: application/json"</span> \
+  -d <span class="c-str">'{"model": "pro"}'</span></div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{ <span class="c-key">"success"</span>: <span class="c-val">true</span>, <span class="c-key">"message"</span>: <span class="c-str">"Model 'pro' seçildi."</span> }</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- KEYS -->
+  <div class="section" id="keys">
+    <div class="section-header">
+      <div class="section-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
+      <div class="section-title">API Keys</div>
+      <span class="section-id">#keys</span>
+    </div>
+    <div class="endpoint" id="ep-keys-get">
+      <div class="endpoint-header" onclick="toggleEp('ep-keys-get')"><span class="ep-method get">GET</span><span class="ep-path">/api/keys</span><span class="ep-desc">Tüm key'leri listele</span><span class="ep-auth pub">Public</span><span class="ep-chevron">▼</span></div>
+      <div class="endpoint-body">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl http://localhost:47371/api/keys</div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{
+  <span class="c-key">"success"</span>: <span class="c-val">true</span>,
+  <span class="c-key">"keys"</span>: [{ <span class="c-key">"id"</span>: <span class="c-str">"uuid"</span>, <span class="c-key">"label"</span>: <span class="c-str">"default"</span>, <span class="c-key">"keyFull"</span>: <span class="c-str">"gmb_xxx..."</span>, <span class="c-key">"totalRequests"</span>: <span class="c-num">42</span> }]
+}</div>
+      </div>
+    </div>
+    <div class="endpoint" id="ep-keys-post">
+      <div class="endpoint-header" onclick="toggleEp('ep-keys-post')"><span class="ep-method post">POST</span><span class="ep-path">/api/keys</span><span class="ep-desc">Yeni key oluştur</span><span class="ep-auth pub">Public</span><span class="ep-chevron">▼</span></div>
+      <div class="endpoint-body">
+        <table><tr><th>Alan</th><th>Tip</th><th>Açıklama</th></tr><tr><td><code>label</code></td><td>string</td><td>Key etiketi</td></tr></table>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl -X POST http://localhost:47371/api/keys \
+  -H <span class="c-str">"Content-Type: application/json"</span> \
+  -d <span class="c-str">'{"label": "production"}'</span></div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{ <span class="c-key">"success"</span>: <span class="c-val">true</span>, <span class="c-key">"key"</span>: { <span class="c-key">"id"</span>: <span class="c-str">"uuid"</span>, <span class="c-key">"key"</span>: <span class="c-str">"gmb_xxx..."</span>, <span class="c-key">"label"</span>: <span class="c-str">"production"</span> } }</div>
+      </div>
+    </div>
+    <div class="endpoint" id="ep-keys-del">
+      <div class="endpoint-header" onclick="toggleEp('ep-keys-del')"><span class="ep-method delete">DELETE</span><span class="ep-path">/api/keys/:id</span><span class="ep-desc">Key sil</span><span class="ep-auth pub">Public</span><span class="ep-chevron">▼</span></div>
+      <div class="endpoint-body">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl -X DELETE http://localhost:47371/api/keys/YOUR_KEY_UUID</div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{ <span class="c-key">"success"</span>: <span class="c-val">true</span>, <span class="c-key">"message"</span>: <span class="c-str">"Key silindi."</span> }</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="section" id="stats">
+    <div class="section-header">
+      <div class="section-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
+      <div class="section-title">İstatistikler</div>
+      <span class="section-id">#stats</span>
+    </div>
+    <div class="endpoint" id="ep-stats">
+      <div class="endpoint-header" onclick="toggleEp('ep-stats')"><span class="ep-method get">GET</span><span class="ep-path">/api/stats</span><span class="ep-desc">Kullanım istatistikleri</span><span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span></div>
+      <div class="endpoint-body">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl http://localhost:47371/api/stats -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span></div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{
+  <span class="c-key">"success"</span>: <span class="c-val">true</span>,
+  <span class="c-key">"stats"</span>: {
+    <span class="c-key">"total"</span>: <span class="c-num">124</span>, <span class="c-key">"successRate"</span>: <span class="c-num">95.9</span>,
+    <span class="c-key">"avgResponseTime"</span>: <span class="c-num">4231</span>, <span class="c-key">"last24h"</span>: <span class="c-num">42</span>,
+    <span class="c-key">"peakHour"</span>: <span class="c-str">"14:00"</span>, <span class="c-key">"messages"</span>: <span class="c-num">98</span>
+  }
+}</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACTIVITIES -->
+  <div class="section" id="activities">
+    <div class="section-header">
+      <div class="section-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2" ry="2"/></svg></div>
+      <div class="section-title">Aktiviteler</div>
+      <span class="section-id">#activities</span>
+    </div>
+    <div class="endpoint" id="ep-act-get">
+      <div class="endpoint-header" onclick="toggleEp('ep-act-get')"><span class="ep-method get">GET</span><span class="ep-path">/api/activities</span><span class="ep-desc">Aktivite listesi</span><span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span></div>
+      <div class="endpoint-body">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl http://localhost:47371/api/activities -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span></div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{ <span class="c-key">"success"</span>: <span class="c-val">true</span>, <span class="c-key">"activities"</span>: [{ <span class="c-key">"id"</span>: <span class="c-str">"uuid"</span>, <span class="c-key">"content"</span>: <span class="c-str">"..."</span>, <span class="c-key">"category"</span>: <span class="c-str">"gelişme"</span> }] }</div>
+      </div>
+    </div>
+    <div class="endpoint" id="ep-act-post">
+      <div class="endpoint-header" onclick="toggleEp('ep-act-post')"><span class="ep-method post">POST</span><span class="ep-path">/api/activities</span><span class="ep-desc">Yeni aktivite ekle</span><span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span></div>
+      <div class="endpoint-body">
+        <table>
+          <tr><th>Alan</th><th>Tip</th><th>Zorunlu</th><th>Açıklama</th></tr>
+          <tr><td><code>content</code></td><td>string</td><td><span class="req">*</span></td><td>Aktivite içeriği</td></tr>
+          <tr><td><code>category</code></td><td>string</td><td><span class="opt">—</span></td><td><code>görev</code> · <code>not</code> · <code>fikir</code> · <code>hata</code> · <code>gelişme</code></td></tr>
+        </table>
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl -X POST http://localhost:47371/api/activities \
+  -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span> \
+  -H <span class="c-str">"Content-Type: application/json"</span> \
+  -d <span class="c-str">'{"content": "Yeni özellik geliştirdim", "category": "gelişme"}'</span></div>
+      </div>
+    </div>
+    <div class="endpoint" id="ep-act-del">
+      <div class="endpoint-header" onclick="toggleEp('ep-act-del')"><span class="ep-method delete">DELETE</span><span class="ep-path">/api/activities/:id</span><span class="ep-desc">Aktivite sil</span><span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span></div>
+      <div class="endpoint-body">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl -X DELETE http://localhost:47371/api/activities/ACTIVITY_UUID \
+  -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span></div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{ <span class="c-key">"success"</span>: <span class="c-val">true</span>, <span class="c-key">"message"</span>: <span class="c-str">"Aktivite silindi."</span> }</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BROWSER -->
+  <div class="section" id="browser">
+    <div class="section-header">
+      <div class="section-icon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+      <div class="section-title">Tarayıcı Kontrolü</div>
+      <span class="section-id">#browser</span>
+    </div>
+    <div class="endpoint" id="ep-browser-open">
+      <div class="endpoint-header" onclick="toggleEp('ep-browser-open')"><span class="ep-method post">POST</span><span class="ep-path">/api/browser/open</span><span class="ep-desc">Chrome'u aç, Gemini'ye git</span><span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span></div>
+      <div class="endpoint-body">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl -X POST http://localhost:47371/api/browser/open -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span></div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{ <span class="c-key">"success"</span>: <span class="c-val">true</span>, <span class="c-key">"message"</span>: <span class="c-str">"Tarayıcı açık."</span> }</div>
+      </div>
+    </div>
+    <div class="endpoint" id="ep-browser-reset">
+      <div class="endpoint-header" onclick="toggleEp('ep-browser-reset')"><span class="ep-method post">POST</span><span class="ep-path">/api/browser/reset</span><span class="ep-desc">Tarayıcıyı kapat ve sıfırla</span><span class="ep-auth req">🔑 Auth</span><span class="ep-chevron">▼</span></div>
+      <div class="endpoint-body">
+        <div class="code-block"><button class="copy-btn" onclick="copyCode(this)">Kopyala</button>curl -X POST http://localhost:47371/api/browser/reset -H <span class="c-str">"Authorization: Bearer gmb_xxxxx"</span></div>
+        <div class="ep-section-title">Response</div>
+        <div class="code-block">{ <span class="c-key">"success"</span>: <span class="c-val">true</span>, <span class="c-key">"message"</span>: <span class="c-str">"Tarayıcı sıfırlandı."</span> }</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-left"><strong>Gemini Bot API v2.0.0</strong> · Playwright tabanlı · Ücretsiz</div>
+    <a href="/" class="footer-link"><span>←</span><span>Dashboard</span></a>
+  </div>
+
+</main>
+
+<!-- docs.css'e ekle: SSE badge -->
+<style>
+.ep-badge-sse {
+  font-size: 8px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(29,111,164,0.1);
+  color: #1d6fa4;
+  border: 1px solid rgba(29,111,164,0.25);
+  font-family: var(--mono);
+  letter-spacing: .3px;
+  flex-shrink: 0;
+}
+</style>
+
+<script src="/js/docs.js"></script>
+</body>
+</html>

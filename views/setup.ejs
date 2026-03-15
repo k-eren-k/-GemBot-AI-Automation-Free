@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kurulum — Gemini Bot</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/setup.css">
+</head>
+<body>
+
+<div class="setup-container">
+  <div class="setup-card">
+    <div class="setup-header">
+      <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <h1 class="title">Gemini Bot Kurulumu</h1>
+      <p class="subtitle">Sistemi kullanmaya başlamak için birkaç hızlı adım.</p>
+    </div>
+
+    <div class="setup-steps">
+      <div class="step active" id="step1">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Chrome Kontrolü</h3>
+          <p>Sistemin çalışması için Google Chrome yüklü olmalıdır.</p>
+          <div class="status-box" id="chromeStatus">Kontrol ediliyor...</div>
+          <button class="btn btn-primary mt-20" id="btnCheckChrome">Tekrar Kontrol Et</button>
+        </div>
+      </div>
+
+      <div class="step" id="step2">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Tarayıcı Profili</h3>
+          <p>Gemini oturumunuzun saklanacağı profil adını seçin.</p>
+          <div class="input-group">
+            <input type="text" id="profileName" value="GeminiUser" placeholder="Profil adı...">
+          </div>
+          <button class="btn btn-primary mt-20" id="btnSaveProfile">Devam Et</button>
+        </div>
+      </div>
+
+      <div class="step" id="step3">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Hazırsınız!</h3>
+          <p>Kurulum başarıyla tamamlandı. Artık dashboard'a geçebilirsiniz.</p>
+          <div class="success-box">Tüm ayarlar kaydedildi.</div>
+          <a href="/" class="btn btn-primary mt-20">Başla</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/setup.js"></script>
+</body>
+</html>

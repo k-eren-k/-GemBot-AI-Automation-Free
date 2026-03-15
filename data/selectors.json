@@ -1,0 +1,12 @@
+{
+  "input": "div[contenteditable=\"true\"]",
+  "send": "button[aria-label*=\"gönder\" i], button[aria-label*=\"send\" i]",
+  "response": "model-response, message-content, .message-content, .markdown",
+  "newChatBtn": "a[data-test-id=\"expanded-button\"][aria-label*=\"Yeni\" i], a[href=\"/app\"]",
+  "modelSelector": "button[aria-label*=\"Mod\" i], .input-area-switch, button[aria-label*=\"Model\" i]",
+  "modelOption": "button.bard-mode-list-button, [role=\"menuitem\"]",
+  "chatList": ".conversations-container, .conversation-items-container",
+  "chatItem": "a[data-test-id=\"conversation\"]",
+  "chatItemTitle": ".conversation-title",
+  "newChat": "[data-test-id=\"reset-button\"], a[href=\"/app\"]"
+}
